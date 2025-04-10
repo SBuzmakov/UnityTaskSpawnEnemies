@@ -28,17 +28,33 @@ namespace Source.Scripts
 
         private IEnumerator SpawnEnemy()
         {
+            WaitForSeconds wait = new WaitForSeconds(_spawnInterval);
+            
             while (_isWorking)
             {
-                yield return new WaitForSeconds(_spawnInterval);
+                yield return wait;
 
                 Enemy enemy = _pool.Take();
 
-                enemy.transform.position = SetSpawnPosition();
+                enemy.transform.position = GetSpawnPosition();
+                
+                Vector3 direction = GetRandomDirection();
+
+                if (enemy.TryGetComponent(out Mover mover))
+                {
+                    mover.SetDirection(direction);
+                    
+                    mover.Rotate(direction);
+                }
             }
         }
 
-        private Vector3 SetSpawnPosition()
+        private Vector3 GetRandomDirection()
+        {
+            return new Vector3(Random.Range(-1f, 1f), 0f, Random.Range(-1f, 1f)).normalized;
+        }
+
+        private Vector3 GetSpawnPosition()
         {
             Vector3 spawnPointPosition = GetRandomSpawnPoint().position;
             
