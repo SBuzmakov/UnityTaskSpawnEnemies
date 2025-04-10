@@ -4,7 +4,7 @@ namespace Source.Scripts
 {
     public class EnemyFactory
     {
-        private Enemy _enemyPrefab;
+        private readonly Enemy _enemyPrefab;
 
         public EnemyFactory(Enemy enemyPrefab)
         {

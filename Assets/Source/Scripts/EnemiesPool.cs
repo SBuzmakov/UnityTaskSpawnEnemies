@@ -12,9 +12,9 @@ namespace Source.Scripts
 
         public void Awake()
         {
-            _enemyFactory = new(_enemyPrefab);
+            _enemyFactory = new EnemyFactory(_enemyPrefab);
 
-            _pool = new(
+            _pool = new ObjectPool<Enemy>(
                 createFunc: CreateEnemy,
                 actionOnGet: OnTakeFromPool,
                 actionOnRelease: OnReturnToPool,
