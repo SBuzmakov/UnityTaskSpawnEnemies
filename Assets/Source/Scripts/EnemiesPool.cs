@@ -40,7 +40,7 @@ namespace Source.Scripts
 
         private void OnDestroyEnemy(Enemy enemy)
         {
-            enemy.LeftZone -= Release;
+            enemy.ExitedZone -= Release;
             
             Destroy(enemy.gameObject);
         }
@@ -52,9 +52,9 @@ namespace Source.Scripts
 
         private Enemy CreateEnemy()
         {
-            Enemy newEnemy = _enemyFactory.ConstructEnemy();
+            Enemy newEnemy = _enemyFactory.Create();
 
-            newEnemy.LeftZone += Release;
+            newEnemy.ExitedZone += Release;
             
             return newEnemy;
         }

@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Source.Scripts
 {
@@ -10,26 +12,30 @@ namespace Source.Scripts
         [SerializeField] private EnemiesPool _pool;
         [SerializeField] private float _spawnInterval = 2.0f;
         [SerializeField] private bool _isWorking = true;
-        [SerializeField] private GameObject _ground;
+        [SerializeField] private Transform _ground;
 
         private float _positionY;
-        
+        private Coroutine _coroutine;
+
         private void Start()
         {
-            _positionY = _ground.transform.position.y + 1;
-            
-            StartCoroutine(SpawnEnemy());
+            _positionY = _ground.position.y + 1;
+
+            _coroutine = StartCoroutine(SpawnEnemy());
         }
 
         private void OnDisable()
         {
-            StopCoroutine(SpawnEnemy());
+            if (_coroutine != null)
+                StopCoroutine(_coroutine);
+            else
+                throw new NullReferenceException("_coroutine is null");
         }
 
         private IEnumerator SpawnEnemy()
         {
             WaitForSeconds wait = new WaitForSeconds(_spawnInterval);
-            
+
             while (_isWorking)
             {
                 yield return wait;
@@ -37,15 +43,10 @@ namespace Source.Scripts
                 Enemy enemy = _pool.Take();
 
                 enemy.transform.position = GetSpawnPosition();
-                
+
                 Vector3 direction = GetRandomDirection();
 
-                if (enemy.TryGetComponent(out Mover mover))
-                {
-                    mover.SetDirection(direction);
-                    
-                    mover.Rotate(direction);
-                }
+                enemy.GetDirection(direction);
             }
         }
 
@@ -57,7 +58,7 @@ namespace Source.Scripts
         private Vector3 GetSpawnPosition()
         {
             Vector3 spawnPointPosition = GetRandomSpawnPoint().position;
-            
+
             return new Vector3(spawnPointPosition.x, _positionY, spawnPointPosition.z);
         }
 
@@ -67,4 +68,3 @@ namespace Source.Scripts
         }
     }
 }
-

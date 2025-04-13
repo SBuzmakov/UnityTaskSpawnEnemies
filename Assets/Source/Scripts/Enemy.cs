@@ -5,14 +5,26 @@ namespace Source.Scripts
 {
     public class Enemy : MonoBehaviour
     {
-        public event Action<Enemy> LeftZone;
+        private Mover _mover;
+        
+        public event Action<Enemy> ExitedZone;
+
+        private void Awake()
+        {
+            _mover = gameObject.AddComponent<Mover>();
+        }
         
         private void OnTriggerExit(Collider other)
         {
             if (other.TryGetComponent<ZoneTrigger>(out _))
             {
-                LeftZone?.Invoke(this);
+                ExitedZone?.Invoke(this);
             }
+        }
+
+        public void GetDirection(Vector3 direction)
+        {
+            _mover.SetDirection(direction);
         }
     }
 }

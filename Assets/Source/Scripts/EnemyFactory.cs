@@ -11,7 +11,7 @@ namespace Source.Scripts
             _enemyPrefab = enemyPrefab;
         }
 
-        public Enemy ConstructEnemy()
+        public Enemy Create()
         {
             return Object.Instantiate(_enemyPrefab);
         }
