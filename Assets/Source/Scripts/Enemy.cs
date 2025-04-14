@@ -5,14 +5,9 @@ namespace Source.Scripts
 {
     public class Enemy : MonoBehaviour
     {
-        private Mover _mover;
+        [SerializeField] private Mover _mover;
         
         public event Action<Enemy> ExitedZone;
-
-        private void Awake()
-        {
-            _mover = gameObject.AddComponent<Mover>();
-        }
         
         private void OnTriggerExit(Collider other)
         {
@@ -22,7 +17,7 @@ namespace Source.Scripts
             }
         }
 
-        public void GetDirection(Vector3 direction)
+        public void SetDirection(Vector3 direction)
         {
             _mover.SetDirection(direction);
         }

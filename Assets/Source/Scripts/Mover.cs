@@ -10,19 +10,13 @@ namespace Source.Scripts
 
         private void Update()
         {
-            Move(_direction);
+            transform.rotation = Quaternion.LookRotation(_direction);
+            transform.position += _direction * (Speed * Time.deltaTime);
         }
 
         public void SetDirection(Vector3 direction)
         {
             _direction = direction;
-        }
-
-        private void Move(Vector3 direction)
-        {
-            transform.rotation = Quaternion.LookRotation(_direction);
-            
-            transform.position += direction * (Speed * Time.deltaTime);
         }
     }
 }
