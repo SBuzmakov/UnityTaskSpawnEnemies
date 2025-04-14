@@ -8,6 +8,7 @@ namespace Source.Scripts
         [SerializeField] private Mover _mover;
         
         public event Action<Enemy> ExitedZone;
+        public event Action<Enemy> Destroyed;
         
         private void OnTriggerExit(Collider other)
         {
@@ -15,6 +16,11 @@ namespace Source.Scripts
             {
                 ExitedZone?.Invoke(this);
             }
+        }
+
+        private void OnDestroy()
+        {
+            Destroyed?.Invoke(this);
         }
 
         public void SetDirection(Vector3 direction)

@@ -278,51 +278,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7038896946776773101, guid: 7ded7fd4fa5b4eb478d3ea28a936589a, type: 3}
   m_PrefabInstance: {fileID: 240154069}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &260082001
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 260082002}
-  - component: {fileID: 260082003}
-  m_Layer: 0
-  m_Name: EnemiesPool
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &260082002
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 260082001}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 20.115627, y: 15.610011, z: 52.383476}
-  m_LocalScale: {x: 2.4351082, y: 1, z: 2.8372014}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1763254883}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &260082003
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 260082001}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4cf4615a34840b438a137850a1f9a22, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _enemyPrefab: {fileID: 4622517190291178339, guid: 2e7d4403af7d6fe48a8fc221f2fbdd1d, type: 3}
 --- !u!1 &317565039
 GameObject:
   m_ObjectHideFlags: 0
@@ -978,7 +933,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 260082002}
   - {fileID: 2012271291}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1042,10 +996,10 @@ MonoBehaviour:
   - {fileID: 1553342190}
   - {fileID: 241759602}
   - {fileID: 2120269226}
-  _pool: {fileID: 260082003}
   _spawnInterval: 2
   _isWorking: 1
   _ground: {fileID: 2080998125}
+  _enemyPrefab: {fileID: 4622517190291178339, guid: 2e7d4403af7d6fe48a8fc221f2fbdd1d, type: 3}
 --- !u!1001 &2055470818
 PrefabInstance:
   m_ObjectHideFlags: 0
