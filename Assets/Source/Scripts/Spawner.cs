@@ -1,6 +1,4 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
 using Random = UnityEngine.Random;
@@ -9,13 +7,12 @@ namespace Source.Scripts
 {
     public class Spawner : MonoBehaviour
     {
-        [SerializeField] private List<Transform> _spawnPoints;
-        [SerializeField] private float _spawnInterval = 2.0f;
+        [SerializeField] private Transform _target;
+        [SerializeField] private float _spawnInterval = 10.0f;
         [SerializeField] private bool _isWorking = true;
-        [SerializeField] private Transform _ground;
         [SerializeField] private Enemy _enemyPrefab;
+        [SerializeField] private Transform _spawnPosition;
 
-        private float _positionY;
         private Coroutine _coroutine;
         private EnemyFactory _enemyFactory;
         private ObjectPool<Enemy> _pool;
@@ -31,8 +28,6 @@ namespace Source.Scripts
 
         private void Start()
         {
-            _positionY = _ground.position.y + 1;
-
             _coroutine = StartCoroutine(SpawnEnemy());
         }
 
@@ -53,20 +48,20 @@ namespace Source.Scripts
 
         private void Dispose(Enemy enemy)
         {
-           enemy.Destroyed -= Dispose;
-           enemy.ExitedZone -= ReleaseEnemy;
+            enemy.Destroyed -= Dispose;
+            enemy.ExitedZone -= ReleaseEnemy;
         }
-        
+
         private IEnumerator SpawnEnemy()
         {
             WaitForSeconds wait = new WaitForSeconds(_spawnInterval);
 
             while (_isWorking)
             {
-                yield return wait;
-
                 Enemy enemy = _pool.Get();
                 TakeEnemyFromPool(enemy);
+
+                yield return wait;
             }
 
             _coroutine = null;
@@ -75,30 +70,14 @@ namespace Source.Scripts
         private void TakeEnemyFromPool(Enemy enemy)
         {
             enemy.gameObject.SetActive(true);
-            enemy.transform.position = GetSpawnPosition();
-            enemy.SetDirection(GetRandomDirection());
+            enemy.transform.position = _spawnPosition.position;
+            enemy.SetDirection(_target);
         }
 
         private void ReleaseEnemy(Enemy enemy)
         {
             _pool.Release(enemy);
             enemy.gameObject.SetActive(false);
-        }
-
-        private Vector3 GetRandomDirection()
-        {
-            return new Vector3(Random.Range(-1f, 1f), 0f, Random.Range(-1f, 1f)).normalized;
-        }
-
-        private Vector3 GetSpawnPosition()
-        {
-            Vector3 spawnPointPosition = GetRandomSpawnPoint().position;
-            return new Vector3(spawnPointPosition.x, _positionY, spawnPointPosition.z);
-        }
-
-        private Transform GetRandomSpawnPoint()
-        {
-            return _spawnPoints[Random.Range(0, _spawnPoints.Count)].transform;
         }
     }
 }

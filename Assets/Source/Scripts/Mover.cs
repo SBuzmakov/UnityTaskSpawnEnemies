@@ -4,19 +4,18 @@ namespace Source.Scripts
 {
     public class Mover : MonoBehaviour
     {
-        private const float Speed = 3.0f;
-
-        private Vector3 _direction;
+        [SerializeField] float _speed = 1.0f;
+        private Transform _targetTransform;
 
         private void Update()
         {
-            transform.rotation = Quaternion.LookRotation(_direction);
-            transform.position += _direction * (Speed * Time.deltaTime);
+            transform.LookAt(_targetTransform.position);
+            transform.position = Vector3.MoveTowards(transform.position, _targetTransform.position , (_speed * Time.deltaTime));
         }
 
-        public void SetDirection(Vector3 direction)
+        public void SetTargetDirection(Transform targetTransform)
         {
-            _direction = direction;
+            _targetTransform = targetTransform;
         }
     }
 }

@@ -23,9 +23,9 @@ namespace Source.Scripts
             Destroyed?.Invoke(this);
         }
 
-        public void SetDirection(Vector3 direction)
+        public void SetDirection(Transform targetPosition)
         {
-            _mover.SetDirection(direction);
+            _mover.SetTargetDirection(targetPosition);
         }
     }
 }
