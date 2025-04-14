@@ -562,10 +562,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4364649805840150}
   - component: {fileID: 95599254065212114}
-  - component: {fileID: 9081161946181163479}
   - component: {fileID: 4622517190291178339}
   - component: {fileID: 2653875900475160515}
   - component: {fileID: 5481798821872881505}
+  - component: {fileID: 8875315394011085621}
   m_Layer: 0
   m_Name: Demon
   m_TagString: Untagged
@@ -611,19 +611,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &9081161946181163479
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1264443996888144}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 11f67fad4ec523443b947def90d434a2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _speed: 2
 --- !u!114 &4622517190291178339
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -636,6 +623,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f72c25ede252e7e4ab64066deb15a2eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _mover: {fileID: 8875315394011085621}
 --- !u!136 &2653875900475160515
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -686,6 +674,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &8875315394011085621
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1264443996888144}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11f67fad4ec523443b947def90d434a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1271822325240758
 GameObject:
   m_ObjectHideFlags: 0

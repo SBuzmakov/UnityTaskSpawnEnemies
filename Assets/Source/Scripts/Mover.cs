@@ -4,28 +4,19 @@ namespace Source.Scripts
 {
     public class Mover : MonoBehaviour
     {
-        [SerializeField] float _speed;
-        
-        private void OnEnable()
-        {
-            RandomRotate();
-        }
+        private const float Speed = 3.0f;
+
+        private Vector3 _direction;
 
         private void Update()
         {
-            MoveForward();
+            transform.rotation = Quaternion.LookRotation(_direction);
+            transform.position += _direction * (Speed * Time.deltaTime);
         }
 
-        private void MoveForward()
+        public void SetDirection(Vector3 direction)
         {
-            transform.Translate(Vector3.forward * (_speed * Time.deltaTime));
-        }
-
-        private void RandomRotate()
-        {
-            float randomRotation = Random.Range(0f, 360f);
-
-            transform.Rotate(Vector3.up, randomRotation);
+            _direction = direction;
         }
     }
 }

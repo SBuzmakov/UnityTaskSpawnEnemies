@@ -5,14 +5,27 @@ namespace Source.Scripts
 {
     public class Enemy : MonoBehaviour
     {
-        public event Action<Enemy> LeftZone;
+        [SerializeField] private Mover _mover;
+        
+        public event Action<Enemy> ExitedZone;
+        public event Action<Enemy> Destroyed;
         
         private void OnTriggerExit(Collider other)
         {
             if (other.TryGetComponent<ZoneTrigger>(out _))
             {
-                LeftZone?.Invoke(this);
+                ExitedZone?.Invoke(this);
             }
+        }
+
+        private void OnDestroy()
+        {
+            Destroyed?.Invoke(this);
+        }
+
+        public void SetDirection(Vector3 direction)
+        {
+            _mover.SetDirection(direction);
         }
     }
 }
