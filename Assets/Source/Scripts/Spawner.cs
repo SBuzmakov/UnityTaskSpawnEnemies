@@ -22,7 +22,8 @@ namespace Source.Scripts
             _enemyFactory = new EnemyFactory(_enemyPrefab);
 
             _pool = new ObjectPool<Enemy>(
-                createFunc: CreateEnemy
+                createFunc: CreateEnemy,
+                actionOnGet: OnGetEnemy
             );
             
             _coroutine = StartCoroutine(SpawnEnemy());
@@ -56,7 +57,7 @@ namespace Source.Scripts
             while (_isWorking)
             {
                 Enemy enemy = _pool.Get();
-                TakeEnemyFromPool(enemy);
+                OnGetEnemy(enemy);
 
                 yield return wait;
             }
@@ -64,7 +65,7 @@ namespace Source.Scripts
             _coroutine = null;
         }
 
-        private void TakeEnemyFromPool(Enemy enemy)
+        private void OnGetEnemy(Enemy enemy)
         {
             enemy.gameObject.SetActive(true);
             enemy.transform.position = _spawnPosition.position;
