@@ -24,10 +24,7 @@ namespace Source.Scripts
             _pool = new ObjectPool<Enemy>(
                 createFunc: CreateEnemy
             );
-        }
-
-        private void Start()
-        {
+            
             _coroutine = StartCoroutine(SpawnEnemy());
         }
 
@@ -40,7 +37,7 @@ namespace Source.Scripts
         private Enemy CreateEnemy()
         {
             Enemy newEnemy = _enemyFactory.Create();
-            newEnemy.ExitedZone += ReleaseEnemy;
+            newEnemy.Finalized += ReleaseEnemy;
             newEnemy.Destroyed += Dispose;
 
             return newEnemy;
@@ -49,7 +46,7 @@ namespace Source.Scripts
         private void Dispose(Enemy enemy)
         {
             enemy.Destroyed -= Dispose;
-            enemy.ExitedZone -= ReleaseEnemy;
+            enemy.Finalized -= ReleaseEnemy;
         }
 
         private IEnumerator SpawnEnemy()

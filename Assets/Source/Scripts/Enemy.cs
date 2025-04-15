@@ -6,16 +6,20 @@ namespace Source.Scripts
     public class Enemy : MonoBehaviour
     {
         [SerializeField] private Mover _mover;
-        
-        public event Action<Enemy> ExitedZone;
+
+        public event Action<Enemy> Finalized;
         public event Action<Enemy> Destroyed;
-        
+
+        private void OnCollisionEnter(Collision collision)
+        {
+            if (collision.gameObject.TryGetComponent<Target>(out _))
+                Finalized?.Invoke(this);
+        }
+
         private void OnTriggerExit(Collider other)
         {
             if (other.TryGetComponent<ZoneTrigger>(out _))
-            {
-                ExitedZone?.Invoke(this);
-            }
+                Finalized?.Invoke(this);
         }
 
         private void OnDestroy()
