@@ -6,7 +6,6 @@ namespace Source.Scripts
     public class Enemy : MonoBehaviour
     {
         [SerializeField] private Mover _mover;
-        [SerializeField] private AudioSource _audio;
 
         public event Action<Enemy> Finalized;
         public event Action<Enemy> Destroyed;
@@ -15,9 +14,6 @@ namespace Source.Scripts
         {
             if (collision.gameObject.TryGetComponent<Target>(out _))
             {
-                if (_audio != null)
-                    _audio.Play();
-                
                 Finalized?.Invoke(this);
             }
         }
