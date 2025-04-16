@@ -278,7 +278,7 @@ PrefabInstance:
       objectReference: {fileID: 4622517190291178339, guid: 2e7d4403af7d6fe48a8fc221f2fbdd1d, type: 3}
     - target: {fileID: 9216312955482281227, guid: 16eb5a117f5037a409dc4ab9e399ee2e, type: 3}
       propertyPath: _spawnInterval
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 9216312955482281227, guid: 16eb5a117f5037a409dc4ab9e399ee2e, type: 3}
       propertyPath: _spawnPosition
@@ -864,8 +864,8 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
-  orthographic: 0
-  orthographic size: 5
+  orthographic: 1
+  orthographic size: 13.59
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -889,8 +889,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.51512986, y: 0.13919802, z: -0.08586794, w: 0.84136313}
-  m_LocalPosition: {x: 9.32, y: 29.8, z: -13.5}
+  m_LocalRotation: {x: 0.22268775, y: 0.1351996, z: -0.03119123, w: 0.96496546}
+  m_LocalPosition: {x: 4.416398, y: 20.01249, z: -27.775421}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
