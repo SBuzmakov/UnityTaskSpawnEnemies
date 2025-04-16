@@ -24,6 +24,11 @@ namespace Source.Scripts
             Move();
         }
 
+        public void SetTargetDirection(Transform targetTransform)
+        {
+            _target = targetTransform;
+        }
+
         private void Move()
         {
             if (_waypoints.Count == 0 || _waypoints == null)
@@ -36,11 +41,6 @@ namespace Source.Scripts
             
             if (Vector3.Distance(transform.position, _waypoints[_currentWaypoint].position) < ChangeWaypointDistance)
                 _currentWaypoint = (_currentWaypoint + 1) % _waypoints.Count;
-        }
-
-        public void SetTargetDirection(Transform targetTransform)
-        {
-            _target = targetTransform;
         }
     }
 }
