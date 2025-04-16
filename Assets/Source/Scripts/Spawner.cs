@@ -1,7 +1,6 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Pool;
-using Random = UnityEngine.Random;
 
 namespace Source.Scripts
 {
@@ -38,7 +37,7 @@ namespace Source.Scripts
         private Enemy CreateEnemy()
         {
             Enemy newEnemy = _enemyFactory.Create();
-            newEnemy.Finalized += ReleaseEnemy;
+            newEnemy.TargetReached += ReleaseEnemy;
             newEnemy.Destroyed += Dispose;
 
             return newEnemy;
@@ -47,7 +46,7 @@ namespace Source.Scripts
         private void Dispose(Enemy enemy)
         {
             enemy.Destroyed -= Dispose;
-            enemy.Finalized -= ReleaseEnemy;
+            enemy.TargetReached -= ReleaseEnemy;
         }
 
         private IEnumerator SpawnEnemy()
@@ -69,7 +68,7 @@ namespace Source.Scripts
         {
             enemy.gameObject.SetActive(true);
             enemy.transform.position = _spawnPosition.position;
-            enemy.SetDirection(_target);
+            enemy.Initialize(_target);
         }
 
         private void ReleaseEnemy(Enemy enemy)

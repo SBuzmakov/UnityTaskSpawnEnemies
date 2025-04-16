@@ -7,21 +7,29 @@ namespace Source.Scripts
     {
         [SerializeField] private Mover _mover;
 
-        public event Action<Enemy> Finalized;
+        private TargetDetector _targetDetector;
+
+        public event Action<Enemy> TargetReached;
         public event Action<Enemy> Destroyed;
 
-        private void OnCollisionEnter(Collision collision)
+        private void Awake()
         {
-            if (collision.gameObject.TryGetComponent<Target>(out _))
-            {
-                Finalized?.Invoke(this);
-            }
+            _targetDetector = new TargetDetector(transform);
         }
 
-        private void OnTriggerExit(Collider other)
+        private void OnEnable()
         {
-            if (other.TryGetComponent<ZoneTrigger>(out _))
-                Finalized?.Invoke(this);
+            _targetDetector.MinDistanceReached += OnTargetReached;
+        }
+
+        private void Update()
+        {
+            _targetDetector.Update();
+        }
+        
+        private void OnDisable()
+        {
+            _targetDetector.MinDistanceReached -= OnTargetReached;
         }
 
         private void OnDestroy()
@@ -29,9 +37,15 @@ namespace Source.Scripts
             Destroyed?.Invoke(this);
         }
 
-        public void SetDirection(Transform targetPosition)
+        public void Initialize(Transform targetTransform)
         {
-            _mover.SetTargetDirection(targetPosition);
+            _mover.SetTargetDirection(targetTransform);
+            _targetDetector.SetValue(targetTransform);
+        }
+
+        private void OnTargetReached()
+        {
+            TargetReached?.Invoke(this);
         }
     }
 }
